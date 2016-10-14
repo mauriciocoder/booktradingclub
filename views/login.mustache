@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Book Trading Club</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <!--Navbar-->
+    <nav class="navbar navbar-dark primary-color-dark navbar-fixed-top">
+        <!-- Collapse button-->
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="container">
+            <!--Collapse content-->
+            <div class="collapse navbar-toggleable-xs" id="collapseEx2">
+                <!--Navbar Brand-->
+                <a class="navbar-brand" href="/">BookTradingClub</a>
+                <!--Signup-->
+                <ul class="nav navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">SignUp</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="p-t-6">
+    <!--Main layout-->
+    <div class="container">
+        <!--Login row-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--Heading -->
+                <h2 class="h2-responsive text-xs-center">Login</h2>
+            </div>
+        </div>
+        {{#message}}
+        <!--Message row-->
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-xs-center" style="color:#CC0000">{{message}}</p>
+            </div>
+        </div>
+        {{/message}}
+        <form action="/login" method="post">
+        <!--Username row-->
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!--Username -->
+                <div class="md-form">
+                    <i class="fa fa-user prefix"></i>
+                    <input type="text" name="username" class="form-control">
+                    <label for="form2">Username</label>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <!--Password row-->
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!--Password -->
+                <div class="md-form">
+                    <i class="fa fa-lock prefix"></i>
+                    <input type="password" name="password" class="form-control">
+                    <label for="form2">Password</label>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <!--Submit row-->
+        <div class="row">
+            <div class="col-md-12 text-xs-center">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+        </div>
+        </form>
+    </div>    
+</main>
+<footer class="page-footer blue center-on-small-only">
+</footer>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/tether.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@ var router = express.Router();
 module.exports = function(passport) {
     router.get("/", function(req, res) {
         console.log("Chegou na raiz!");
-         res.render("home", { message: req.flash("message") });
+        res.redirect("/books");
     });
 
     /* Handle Logout */
@@ -11,10 +11,13 @@ module.exports = function(passport) {
 		req.logout();
 		res.redirect("/");
 	});
+	
+	router.use("/books", require("./books")());
+	router.use("/register", require("./register")(passport));
+    router.use("/login", require("./login")(passport));
     /*
     router.use("/login", require("./login")(passport));
     router.use("/register", require("./register")(passport));
-    router.use("/polls", require("./polls")());
     router.use("/poll", require("./poll")());
     router.use("/answer", require("./answer")());
     */

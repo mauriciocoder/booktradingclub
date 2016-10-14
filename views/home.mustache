@@ -26,7 +26,8 @@
             <!--Collapse content-->
             <div class="collapse navbar-toggleable-xs" id="collapseEx2">
                 <!--Navbar Brand-->
-                <a class="navbar-brand" href="#">BookTradingClub</a>
+                <a class="navbar-brand" href="/">BookTradingClub</a>
+                {{#authenticated}}
                 <!--Links-->
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
@@ -36,15 +37,19 @@
                         <a class="nav-link" href="#">Trades</a>
                     </li>
                 </ul>
+                {{/authenticated}}
+                {{^authenticated}}
                 <!--Signup-->
                 <ul class="nav navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">SignUp</a>
+                        <a class="nav-link" href="/register">SignUp</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="/login">Login</a>
                     </li>
                 </ul>
+                {{/authenticated}}
+                {{#authenticated}}
                 <!--User Login-->
                 <ul class="nav navbar-nav nav-flex-icons">
                     <li class="nav-item dropdown">
@@ -55,6 +60,7 @@
                         </div>
                     </li>
                 </ul>
+                {{/authenticated}}
             </div>
         </div>
     </nav>
@@ -68,76 +74,31 @@
                 <h2 class="h2-responsive text-xs-center">All Books</h2>
             </div>
         </div>
-        <!--Books Row-->
-        <div class="row">
-            <div class="col-md-4">
-                <!--Book-->
-                <div class="card card-block">
-                    <!--Book image-->
-                    <img class="img-fluid" src="http://books.google.com/books/content?id=AZ5J6B1-4BoC&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE72h1zn_tPG0nn-aXzHp-p0d_VbQI6BxKDxkquwlvQxTr_4ewKfKketOHKRpJ1TSuAWXqf4b62at-rP6suSrB7IXzfsJAKcmsuMy6fKtADmQNjiqRZo97IthrGWUtRfK-_o5NHIW&source=gbs_api" alt="Card image cap">
-                    <!--Book content-->
-                    <div class="card-block">
-                        <!--Title-->
-                        <h4 class="card-title">The Girl Who Kicked the Hornet's Nest</h4>
-                        <!--Author-->
-                        <h6 class="card-title">Stieg Larsson</h4>
-                        <!--Text-->
-                        <p class="card-text">In the third volume of the Millennium series, Lisbeth Salander lies in critical condition in a Swedish hospital, a bullet in her head.
-
-But she's fighting for her life in more ways than one: if and when she recovers, she'll stand trial for three murders. With the help of Mikael Blomkvist, she'll need to identify those in authority who have allowed the vulnerable, like herself, to suffer abuse and violence. And, on her own, she'll seek revenge--against the man who tried to killer her and against the corrupt government institutions that nearly destroyed her life.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
+        {{#books}}
+            {{#startsRow}}
+                <div class="row">
+            {{/startsRow}}
+                <div class="col-md-4">
+                    <!--Book-->
+                    <div class="card card-block">
+                        <!--Book image-->
+                        <img class="img-fluid" src="{{imageUrl}}" alt="Book">
+                        <!--Book content-->
+                        <div class="card-block">
+                            <!--Title-->
+                            <h4 class="card-title">{{title}}</h4>
+                            <!--Author-->
+                            <h6 class="card-title">{{author}}</h4>
+                            <!--Text-->
+                            <p class="card-text">{{description}}</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <!--Card-->
-                <div class="card card-block">
-                    <!--Card image-->
-                    <img class="img-fluid" src="http://books.google.com/books/content?id=AZ5J6B1-4BoC&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE72h1zn_tPG0nn-aXzHp-p0d_VbQI6BxKDxkquwlvQxTr_4ewKfKketOHKRpJ1TSuAWXqf4b62at-rP6suSrB7IXzfsJAKcmsuMy6fKtADmQNjiqRZo97IthrGWUtRfK-_o5NHIW&source=gbs_api" alt="Card image cap">
-                    <!--/.Card image-->
-                    <!--Card content-->
-                    <div class="card-block">
-                        <!--Title-->
-                        <h4 class="card-title">The Girl Who Kicked the Hornet's Nest</h4>
-                        <!--Author-->
-                        <h6 class="card-title">Stieg Larsson</h4>
-                        <!--Text-->
-                        <p class="card-text">In the third volume of the Millennium series, Lisbeth Salander lies in critical condition in a Swedish hospital, a bullet in her head.
-
-But she's fighting for her life in more ways than one: if and when she recovers, she'll stand trial for three murders. With the help of Mikael Blomkvist, she'll need to identify those in authority who have allowed the vulnerable, like herself, to suffer abuse and violence. And, on her own, she'll seek revenge--against the man who tried to killer her and against the corrupt government institutions that nearly destroyed her life.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                    </div>
-                    <!--/.Card content-->
+            {{#endRow}}
                 </div>
-            </div>
-            <div class="col-md-4">
-                <!--Card-->
-                <div class="card card-block">
-                    <!--Card image-->
-                    <img class="img-fluid" src="http://books.google.com/books/content?id=AZ5J6B1-4BoC&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE72h1zn_tPG0nn-aXzHp-p0d_VbQI6BxKDxkquwlvQxTr_4ewKfKketOHKRpJ1TSuAWXqf4b62at-rP6suSrB7IXzfsJAKcmsuMy6fKtADmQNjiqRZo97IthrGWUtRfK-_o5NHIW&source=gbs_api" alt="Card image cap">
-                    <!--/.Card image-->
-                    <!--Card content-->
-                    <div class="card-block">
-                        <!--Title-->
-                        <h4 class="card-title">The Girl Who Kicked the Hornet's Nest</h4>
-                        <!--Author-->
-                        <h6 class="card-title">Stieg Larsson</h4>
-                        <!--Text-->
-                        <p class="card-text">In the third volume of the Millennium series, Lisbeth Salander lies in critical condition in a Swedish hospital, a bullet in her head.
-
-But she's fighting for her life in more ways than one: if and when she recovers, she'll stand trial for three murders. With the help of Mikael Blomkvist, she'll need to identify those in authority who have allowed the vulnerable, like herself, to suffer abuse and violence. And, on her own, she'll seek revenge--against the man who tried to killer her and against the corrupt government institutions that nearly destroyed her life.</p>
-                        <a href="#" class="btn btn-primary">Details</a>
-                    </div>
-                    <!--/.Card content-->
-                </div>
-            </div>
-        </div>
-        <!--More Books Row-->
-        <div class="row">
-            <div class="col-md-12 text-xs-right">
-                <button type="submit" class="btn btn-default">Show More</button>
-            </div>
-        </div>
+            {{/endRow}}
+        {{/books}}
     </div>    
 </main>
 <!--Footer-->

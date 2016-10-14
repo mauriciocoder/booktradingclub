@@ -9,8 +9,7 @@ module.exports = function(passport) {
 };
 
 function applyLoginStrategy(req, username, password, done) {
-	console.log("LocalStrategy Login hit!");
-    User.findOne({ "username" : username }
+	User.findOne({ "username" : username }
     	, login.bind(null, req, username, password, done)
     );
 }

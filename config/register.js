@@ -10,15 +10,19 @@ module.exports = function(passport) {
 };
 
 function applyRegisterStrategy(req, username, password, done) {
-    console.log("LocalStrategy Register hit!");
+    var state = req.body.state;
+    var city = req.body.city;
+    if (!username || !password || !state || !city) {
+        return done(null, false, req.flash("message", "Invalid contents. All fields are required"));
+    }
     User.findOne({ "username" : username }
-    	, insertUser.bind(null, req, username, password, done)
+    	, insertUser.bind(null, req, username, password, state, city, done)
 	);
 }
 
-function insertUser(req, username, password, done, err, user) {
+function insertUser(req, username, password, state, city, done, err, user) {
     if (err) {
-        return done(err);
+        return done(null, false, req.flash("message", "Error, try again"));
     }
     if (user) {
         console.log("User already exists with username " + username);
@@ -27,6 +31,8 @@ function insertUser(req, username, password, done, err, user) {
     	var user = new User();
     	user.username = username;
     	user.password = createHash(password);
+    	user.state = state;
+    	user.city = city;
     	user.save(function(err) {
     		if (err) {
     			console.log("Error saving user " + err);
