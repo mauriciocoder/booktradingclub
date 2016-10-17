@@ -12,8 +12,7 @@ module.exports = function() {
 };
 
 function handleBooksView(req, res, err, books) {
-    var resContent = { authenticated: req.isAuthenticated() };
-    console.log("resContent.authenticated = " + resContent.authenticated);
+    var resContent = { user: req.user, authenticated: req.isAuthenticated() };
     // Did not find a better way to control index conditionals!! :(
     for (var i = 0; i < books.length; i++) {
         if (i % 3 == 0) {
