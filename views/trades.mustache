@@ -68,37 +68,89 @@
 <main class="p-t-6">
     <!--Main layout-->
     <div class="container">
-        <!--Heading Row-->
+        {{#message}}
+        <!--Message row-->
         <div class="row">
             <div class="col-md-12">
-                <h2 class="h2-responsive text-xs-center">All Books</h2>
+                <p class="text-xs-center" style="color:#CC0000">{{message}}</p>
             </div>
         </div>
-        {{#books}}
-            {{#startsRow}}
-                <div class="row">
-            {{/startsRow}}
-                <div class="col-md-4">
-                    <!--Book-->
-                    <div class="card card-block">
-                        <!--Book image-->
-                        <img class="img-fluid" src="{{imageUrl}}" alt="Book">
-                        <!--Book content-->
-                        <div class="card-block">
-                            <!--Title-->
-                            <h4 class="card-title">{{title}}</h4>
-                            <!--Author-->
-                            <h6 class="card-title">{{author}}</h4>
-                            <!--Text-->
-                            <p class="card-text">{{description}}</p>
-                            <a href="/book/{{_id}}" class="btn btn-primary">Details</a>
-                        </div>
-                    </div>
-                </div>
-            {{#endRow}}
-                </div>
-            {{/endRow}}
-        {{/books}}
+        {{/message}}
+        <!--Your Offers Row-->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h2-responsive text-xs-center">Your Offers</h2>
+            </div>
+        </div>
+        <!--Your Offers Table-->
+        <div class="row">
+            <div class="col-md-12">  
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Desired Book</th>
+                            <th>Book Owner</th>
+                            <th>Your Book</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#yourOffers}}
+                        <tr>
+                            <td><a href="/book/{{desiredBook._id}}">{{desiredBook.title}}</a></td>
+                            <td>{{desiredBook.owner}}</td>
+                            <td>{{title}}</td>
+                            <td>{{trade.status}}</td>
+                            <td>
+                                {{#isPending}}
+                                    <a href="/trades/cancel/{{trade._id}}">Cancel</a>
+                                {{/isPending}}
+                            </td>
+                        </tr>
+                        {{/yourOffers}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <!--Offered You Row-->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="h2-responsive text-xs-center">Offered You</h2>
+            </div>
+        </div>
+        <!--Offered You Table-->
+        <div class="row">
+            <div class="col-md-12">  
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Offered Book</th>
+                            <th>Book Owner</th>
+                            <th>Your Book</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#offeredYou}}
+                        <tr>
+                            <td><a href="/book/{{offeredBook._id}}">{{offeredBook.title}}</a></td>
+                            <td>{{offeredBook.owner}}</td>
+                            <td>{{title}}</td>
+                            <td>{{trade.status}}</td>
+                            <td>
+                                {{#isPending}}
+                                    <a href="/trades/accept/{{trade._id}}">Accept</a>&nbsp;<a href="/trades/reject/{{trade._id}}">Reject</a>
+                                {{/isPending}}
+                            </td>
+                        </tr>
+                        {{/offeredYou}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>    
 </main>
 <!--Footer-->

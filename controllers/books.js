@@ -3,7 +3,7 @@ var router = express.Router();
 var Book = require("../models/book");
 
 module.exports = function() {
-    /* Handle polls GET */
+    /* Handle books GET */
     router.get("/", function(req, res) {
         console.log("chegou no books");
         Book.find({}, handleBooksView.bind(null, req, res));
