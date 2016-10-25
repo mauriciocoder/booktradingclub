@@ -4,7 +4,7 @@ var Book = require("../models/book");
 var Trade = require("../models/trade");
 var mongoose = require("mongoose");
 
-module.exports = function() {
+module.exports = function(passport) {
     router.get("/:BOOKID", function(req, res) {
         var bookId = req.params.BOOKID;
         console.log("chegou no book - bookId = " + bookId);

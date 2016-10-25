@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Book = require("../models/book");
 
-module.exports = function() {
+module.exports = function(passport) {
     /* Handle books GET */
     router.get("/", function(req, res) {
         console.log("chegou no books");
