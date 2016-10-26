@@ -122,12 +122,14 @@
         </div>
         {{#authenticated}}
         {{#hasUserBooks}}
+        {{^isBookOwner}}
         <!--Ask For Trade Row-->
         <div class="row">
             <div class="col-md-12 text-xs-right">
                 <button class="btn btn-default" id="btnOfferTrade1">Offer Trade</button>
             </div>
         </div>
+        {{/isBookOwner}}
         {{/hasUserBooks}}
         {{/authenticated}}
         {{/book}}

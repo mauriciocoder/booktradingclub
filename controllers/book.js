@@ -29,6 +29,7 @@ module.exports = function(passport) {
 function handleBookView(req, res, err, book) {
     var resContent = { user: req.user, authenticated: req.isAuthenticated() };
     resContent.book = book;
+    resContent.isBookOwner = req.user.username == book[0].owner;
     resContent.message = req.flash("message");
     if (req.isAuthenticated()) {
         // TODO: Check if book was offered for a trade
@@ -38,11 +39,9 @@ function handleBookView(req, res, err, book) {
             if (resContent.hasUserBooks) {
                 resContent.userBooks[0].firstBook = true;
             }
-            console.log("Chegou no render!!! 1");
             res.render("book", resContent);
         });
     } else {
-        console.log("Chegou no render!!! 2");
         res.render("book", resContent);
     }
 }
