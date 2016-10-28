@@ -24,6 +24,11 @@ function handleBooksView(req, res, err, books) {
         if (i == books.length - 1) {
             books[i]["endRow"] = true;
         }
+        console.log("books[i] = " + JSON.stringify(books[i]));
+        var description = books[i]["description"];
+        console.log("description antes = " + description);
+        books[i]["description"] = description.substring(0, 200) + "...";
+        console.log("description DEPOIS = " + books[i]["description"]);
     }
     resContent.books = books;
     resContent.message = req.flash("message");

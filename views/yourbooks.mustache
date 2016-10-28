@@ -82,18 +82,24 @@
             </div>
         </div>
         {{/message}}
+        <!--Loading Message row-->
+        <div id="divMsgApi" class="row" style="display:none">
+            <div class="col-md-12">
+                <p id="pMsgApi" class="text-xs-center" style="color:#CC0000"></p>
+            </div>
+        </div>
         <!--Add Book Row-->
         <div class="row">
             <div class="col-md-11">
                 <!--Book Title -->
                 <div class="md-form">
                     <i class="fa prefix"></i>
-                    <input type="text" name="txtUsername" class="form-control">
+                    <input type="text" id="txtBook" class="form-control">
                     <label for="form2">Add New Book</label>
                 </div>
             </div>
             <div class="col-md-1 text-xs-right">
-                <button type="submit" class="btn btn-default">Add</button>
+                <button id="btnAdd" type="submit" class="btn btn-default">Add</button>
             </div>
         </div>
         <!--Books Row-->
@@ -129,6 +135,15 @@
 <footer class="page-footer primary-color-dark text-xs-center">
     <div class="container-fluid">©2016 Bonetti, Mauricio</div>
 </footer>
+<form id="frmAddBook" action="/yourbooks/add" method="POST">
+<input id="txtTitle" name="title" type="hidden" value=""/>
+<input id="txtPublisher" name="publisher" type="hidden" value=""/>
+<input id="txtDescription" name="description" type="hidden" value=""/>
+<input id="txtIsbn" name="isbn" type="hidden" value=""/>
+<input id="txtPages" name="pages" type="hidden" value=""/>
+<input id="txtImageUrl" name="imageUrl" type="hidden" value=""/>
+<input id="txtAuthor" name="author" type="hidden" value=""/>
+</form>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
@@ -138,5 +153,37 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="js/mdb.min.js"></script>
+<script>
+var url = "https://www.googleapis.com/books/v1/volumes?key=AIzaSyCMiS6JM9wTQdrBPGNRiepNZOf5q0QOrAk&maxResults=1&q=";
+    
+function handleAddBook() {
+    var query = $("#txtBook").val();
+    var searchUrl = url + query;
+    $("#divMsgApi").show();
+    $("#pMsgApi").html("Loading...");
+    $.get(searchUrl, function(data) {
+        $("#divMsgApi").hide();
+        var title = data.items[0].volumeInfo.title;
+        $("#txtTitle").val(title);
+        var publisher = data.items[0].volumeInfo.publisher;
+        $("#txtPublisher").val(publisher);
+        var description = data.items[0].volumeInfo.description;
+        $("#txtDescription").val(description);
+        var isbn = data.items[0].volumeInfo.industryIdentifiers[0].identifier;
+        $("#txtIsbn").val(isbn);
+        var pages = data.items[0].volumeInfo.pageCount;
+        $("#txtPages").val(pages);
+        var imageUrl = data.items[0].volumeInfo.imageLinks.thumbnail;
+        $("#txtImageUrl").val(imageUrl);
+        var author = data.items[0].volumeInfo.authors.join();
+        $("#txtAuthor").val(author);
+        $("#frmAddBook").submit();
+    });
+}    
+
+$(document).ready(function() {
+    $("#btnAdd").click(handleAddBook);
+});
+</script>    
 </body>
 </html>

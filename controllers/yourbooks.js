@@ -30,6 +30,29 @@ module.exports = function(passport) {
             });
         });
     });
+
+    router.post("/add", function(req, res) {
+        var title = req.body.title;
+        var publisher = req.body.publisher;
+        var description = req.body.description;
+        var isbn = req.body.isbn;
+        var pages = req.body.pages;
+        var imageUrl = req.body.imageUrl;
+        var author = req.body.author;
+        var book = new Book();
+        book.title = title;
+        book.publisher = publisher;
+        book.description = description;
+        book.isbn = isbn;
+        book.pages = pages;
+        book.imageUrl = imageUrl;
+        book.author = author;
+        book.owner = req.user.username;
+        book.save(function(err) {
+            req.flash("message", "Book Added");
+            res.redirect("/yourbooks");
+        });
+    });
     
     return router;
 };
