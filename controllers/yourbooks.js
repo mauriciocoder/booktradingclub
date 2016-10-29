@@ -3,6 +3,7 @@ var router = express.Router();
 var Book = require("../models/book");
 var Trade = require("../models/trade");
 var mongoose = require("mongoose");
+var Utils = require("../utils/util");
 
 module.exports = function(passport) {
     router.get("/", function(req, res) {
@@ -62,20 +63,9 @@ function handleBooksView(req, res, err, books) {
         throw err;
     }
     var resContent = { user: req.user, authenticated: req.isAuthenticated() };
-    // Did not find a better way to control index conditionals!! :(
-    for (var i = 0; i < books.length; i++) {
-        if (i % 3 == 0) {
-            books[i]["startsRow"] = true;
-            if (i > 0) {
-                books[i]["endRow"] = true;
-            }
-        }
-        if (i == books.length - 1) {
-            books[i]["endRow"] = true;
-        }
-    }
+    Utils.setBooksPosition(books);
+    Utils.truncateDescription(books);
     resContent.books = books;
-    console.log("yourbooks = " + JSON.stringify(books));
     resContent.message = req.flash("message");
     res.render("yourbooks", resContent);
 }

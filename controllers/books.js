@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Book = require("../models/book");
+var Utils = require("../utils/util");
 
 module.exports = function(passport) {
     /* Handle books GET */
@@ -13,23 +14,8 @@ module.exports = function(passport) {
 
 function handleBooksView(req, res, err, books) {
     var resContent = { user: req.user, authenticated: req.isAuthenticated() };
-    // Did not find a better way to control index conditionals!! :(
-    for (var i = 0; i < books.length; i++) {
-        if (i % 3 == 0) {
-            books[i]["startsRow"] = true;
-            if (i > 0) {
-                books[i]["endRow"] = true;
-            }
-        }
-        if (i == books.length - 1) {
-            books[i]["endRow"] = true;
-        }
-        console.log("books[i] = " + JSON.stringify(books[i]));
-        var description = books[i]["description"];
-        console.log("description antes = " + description);
-        books[i]["description"] = description.substring(0, 200) + "...";
-        console.log("description DEPOIS = " + books[i]["description"]);
-    }
+    Utils.setBooksPosition(books);
+    Utils.truncateDescription(books);
     resContent.books = books;
     resContent.message = req.flash("message");
     res.render("home", resContent);
